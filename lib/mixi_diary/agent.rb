@@ -4,12 +4,7 @@ module MixiDiary
   class Agent
     attr_accessor :title, :body
 
-    def initialize config = nil
-      config ||= Pit.get('mixi.jp',:require => {
-        :email    => 'your email in mixi.jp',
-        :password => 'your password in mixi.jp',
-      })
-
+    def initialize config
       @agent    = login config
       @uid      = get_uid
       @post_key = get_post_key

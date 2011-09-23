@@ -19,5 +19,4 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'mechanize'
-  s.add_runtime_dependency 'pit'
 end
