@@ -11,7 +11,7 @@ module MixiDiary
 
   autoload :Agent, 'mixi_diary/agent'
 
-  def self.agent args
+  def self.agent args = nil
     Agent.new args
   end
 
