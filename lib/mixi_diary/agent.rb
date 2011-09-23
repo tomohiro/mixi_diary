@@ -1,9 +1,16 @@
 # encoding: utf-8
+
 module MixiDiary
 
   class Agent
+
     attr_accessor :title, :body
 
+    # Create a mixi diary agent from a set of config
+    #
+    # @param [Hash] Mixi config 
+    # @option config [String] :email The mixi login email
+    # @option config [String] :password The password
     def initialize config
       @agent    = login config
       @uid      = get_uid
@@ -18,7 +25,10 @@ module MixiDiary
         agent.set_proxy(proxy.host, proxy.port)
       end
 
-      agent.post('http://mixi.jp/login.pl', :next_url => 'home.pl', :email => config[:email], :password => config[:password])
+      agent.post('http://mixi.jp/login.pl',
+                 :next_url => 'home.pl',
+                 :email    => config[:email],
+                 :password => config[:password])
       agent
     end
 
@@ -33,14 +43,22 @@ module MixiDiary
 
     private
 
+    # @return [String] the mixi diary post key
     def get_post_key
-      @agent.get('http://mixi.jp/add_diary.pl', :id => @uid, :submit => 'main', :diary_body => :test, :diary_title => :test)
-      @agent.page.form(:action => 'add_diary.pl').hiddens.select{|item| item.name == 'post_key'}.first.value
+      @agent.get('http://mixi.jp/add_diary.pl',
+                 :id          => @uid,
+                 :submit      => 'main',
+                 :diary_body  => :dummy,
+                 :diary_title => :dummy)
+
+      @agent.page.form(:action => 'add_diary.pl').hiddens.select{ |i| i.name == 'post_key' }.first.value
     end
 
+    # @return [String] the mixi login member id
     def get_uid
       @agent.cookie_jar.jar['mixi.jp']['/']['BF_SESSION'].value.split(/_/).first
     end
+
   end
 
 end
