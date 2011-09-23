@@ -1,4 +1,4 @@
-MixiDiary
+MixiDiary [![Still Maintained](http://stillmaintained.com/Tomohiro/mixi_diary.png)](http://stillmaintained.com/Tomohiro/mixi_diary)
 ================================================================================
 
 
