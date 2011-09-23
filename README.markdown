@@ -18,7 +18,7 @@ Like this.
 ```ruby
 require 'mixi_diary'
 
-diary = MixiDiary.new(:email => 'your email', :password => 'your password')
+diary = MixiDiary.agent(:email => 'your email', :password => 'your password')
 diary.title = '件名'
 diary.body= '本文'
 diary.post
